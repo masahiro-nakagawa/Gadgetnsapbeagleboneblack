@@ -15,7 +15,7 @@ grade: stable
 parts:
   uboot:
     plugin: make
-    source: git://git.denx.de/u-boot.git
+    source: u-boot #git://git.denx.de/u-boot.git
     source-branch: v2018.11
     artifacts: [MLO, u-boot.img]
     override-build: |
