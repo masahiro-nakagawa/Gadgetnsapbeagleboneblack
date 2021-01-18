@@ -6,6 +6,17 @@ if [ ! -d /sys/kernel/config/usb_gadget/g_multi/ ] ; then
     mkdir -p /sys/kernel/config/usb_gadget/g_multi || true
     cd /sys/kernel/config/usb_gadget/g_multi
 
+
+    echo "HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO"a
+    echo "HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO"
+    echo "HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO"
+    echo "HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO"
+    echo "HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO"
+    echo "HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO"
+    echo "HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO"
+    echo "HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO HIRO"
+
+  
     echo 0x0404 > bcdDevice # device revision
     echo 0x0200 > bcdUSB # USB 2.0
     echo 0x1d6b > idVendor # Linux Foundation
