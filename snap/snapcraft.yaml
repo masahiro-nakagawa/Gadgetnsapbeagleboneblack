@@ -1,11 +1,11 @@
 name: beagleboneblack
-version: 18-0.1
+version: '20' 
 summary: BeagleBoneBlack
 description: |
  Bootloader files and partitoning data to create a
- bootable Ubuntu Core 18 image for the BeagleboneBlack.
+ bootable Ubuntu Core 20 image for the BeagleboneBlack.
 type: gadget
-base: core18
+base: core20
 architectures:
   - build-on: amd64
     run-on: armhf
@@ -17,7 +17,7 @@ parts:
     plugin: make
     source: u-boot #git://git.denx.de/u-boot.git
     source-branch: v2018.11
-    artifacts: [MLO, u-boot.img]
+    #artifacts: [MLO, u-boot.img]
     override-build: |
       git apply -v  $SNAPCRAFT_PROJECT_DIR/uboot.patch
       TCHAINVER="$(wget -q -O - \
@@ -31,7 +31,14 @@ parts:
       cp MLO $SNAPCRAFT_PART_INSTALL/
       cp u-boot.img $SNAPCRAFT_PART_INSTALL/
       tools/mkenvimage -r -s 131072 -o $SNAPCRAFT_PART_INSTALL/uboot.env $SNAPCRAFT_PROJECT_DIR/uboot.env.in
-      cd $SNAPCRAFT_PART_INSTALL/; ln -s uboot.env uboot.conf
+      #ubuntu-image fails without zero size uboot.conf.
+      touch $SNAPCRAFT_PART_INSTALL/uboot.conf
+      #cd $SNAPCRAFT_PART_INSTALL/; ln -s uboot.environment uboot.conf
+
+      #prime:
+      #- MLO
+      #- u-boot.img
+
     build-packages:
       - bc
       - bison

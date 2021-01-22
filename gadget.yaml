@@ -17,16 +17,27 @@ volumes:
         offset: 393216
         content:
           - image: u-boot.img
-      - name: system-boot
+      - name: ubuntu-seed
+        role: system-seed
         type: 0C
         filesystem: vfat
-        filesystem-label: system-boot
-        size: 128M
+        size: 1024M
         content:
           - source: initrd-extra.img
             target: initrd-extra.img
           - source: am335x-boneblack.dtb
             target: am335x-boneblack.dtb
+      - name: ubuntu-save
+        role: system-save
+        filesystem: ext4
+        type: 83
+        size: 16M
+      - name: ubuntu-data
+        role: system-data
+        filesystem: ext4
+        type: 83
+        size: 1500M
+
 
 defaults:
   99T7MUlRhtI3U0QFgl5mXXESAiSwt776:
