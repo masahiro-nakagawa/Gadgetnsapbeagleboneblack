@@ -30,14 +30,12 @@ parts:
       CROSS_COMPILE=$(pwd)/toolchain/bin/arm-linux-gnueabihf- make
       cp MLO $SNAPCRAFT_PART_INSTALL/
       cp u-boot.img $SNAPCRAFT_PART_INSTALL/
-      tools/mkenvimage -r -s 131072 -o $SNAPCRAFT_PART_INSTALL/uboot.env $SNAPCRAFT_PROJECT_DIR/uboot.env.in
       #ubuntu-image fails without zero size uboot.conf.
       touch $SNAPCRAFT_PART_INSTALL/uboot.conf
-      #cd $SNAPCRAFT_PART_INSTALL/; ln -s uboot.environment uboot.conf
+      #generate boot.scr 
+      mkimage -A arm -O linux -T script -C none -n "boot script" \
+              -d $SNAPCRAFT_PROJECT_DIR/bootscr.bbb $SNAPCRAFT_PART_INSTALL/boot.scr
 
-      #prime:
-      #- MLO
-      #- u-boot.img
 
     build-packages:
       - bc
@@ -52,15 +50,6 @@ parts:
       - on amd64:
         - gcc-arm-linux-gnueabihf
 
-
-  devicetree:
-    source: dtc
-    plugin: nil
-    override-build: |
-      set -e
-      cp $SNAPCRAFT_PROJECT_DIR/dtc/am335x-boneblack.dtb  $SNAPCRAFT_PART_INSTALL/ #dtc -I dts -O dtb -o $SNAPCRAFT_PART_INSTALL/am335x-boneblack.dtb am335x-boneblack.dts
-    build-packages:
-      - device-tree-compiler
 
 
   initrd-snippet:
